@@ -1,0 +1,12 @@
+---
+
+- name: Download the  mRemote MG installer
+      win_get_url:
+        url: 'http://mremoteng.software.informer.com/download/'
+        dest: 'C:\Users\vagrant\Downloads\mremoteng-installer-1.72.exe'
+
+    - name: Install MSI
+      raw:
+        path: 'C:\Users\vagrant\Downloads\mremoteng-installer-1.72.exe'
+        state: present
+        extra_args: '/S'

@@ -1,0 +1,37 @@
+---
+
+- name: Install IIS
+  hosts: windows
+  gather_facts: false
+  tasks:
+  - name: Install IIS SErvice
+    win_feature:
+      name: "Web-Server"
+      state: present
+      restart: yes
+      include_sub_features: yes
+      include_management_tools: yes
+
+  - name: Copy paramiter file
+    win_copy: src=/home/vagrant/ansiblemediawiki/paramfile.app dest="C:\Program Files\Microsoft\Web Platform Installer\paramfile.app"
+
+  - name: Download and save windows installer file
+    win_get_url: 
+      url: 'http://download.microsoft.com/download/C/F/F/CFF3A0B8-99D4-41A2-AE1A-496C08BEB904/WebPlatformInstaller_amd64_en-US.msi'
+      dest: 'C:\\webpi.msi'
+
+  - name: Install msi package
+    win_msi:
+      path: 'C:\\webpi.msi'
+      state: present
+  
+  - name: Install mysql and mediawiki
+    script: MediaWiki.ps1
+
+  - name: get the visual studio x64 redistributable 2k12 r2
+    win_get_url:
+      url: https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe
+      dest: 'C:\\vcredist_x86.exe'
+
+  - name: Install visual studio
+    raw: 'C:\\vcredist_x86.exe'
