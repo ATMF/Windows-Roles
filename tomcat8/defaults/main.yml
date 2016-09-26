@@ -1,0 +1,7 @@
+---
+# defaults file for tomcat8
+win_temp: c:\temp
+tomcat_base: c:\program files\apache-tomcat
+remote_java_home: C:\Program Files\Java\jdk1.7.0_79
+remote_jre_home: C:\Program Files\Java\jre7
+remote_tomcat_home: C:\Program Files\apache-tomcat\tomcat8

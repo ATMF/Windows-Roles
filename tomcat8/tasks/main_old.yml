@@ -1,0 +1,38 @@
+---
+# tasks file for tomcat8
+- name: Copy Java JRE 7  with win_copy
+  win_copy:
+     src: jdk-7u79-windows-x64.exe
+     dest: "{{win_temp}}"
+- name: Copy Tomcat8 Zip with win_copy
+  win_copy:
+     src: apache-tomcat-8.5.5CHANGED.zip
+     dest: "{{win_temp}}"
+- name:  Create Tomcat Directory with win_file
+  win_file: 
+     path: "{{tomcat_base}}"
+     state: directory
+- name:  Unzip Tomcat Folder with win_unzip
+# tried using variable but it requires absolute path
+  win_unzip: 
+     src: c:\temp\apache-tomcat-8.5.5CHANGED.zip
+     dest: "{{tomcat_base}}"
+- name:  Install Java with raw
+  raw: '"{{win_temp}}"\jdk-7u79-windows-x64.exe /s'
+- name:  Set JAVA_HOME with raw
+  raw: 'setx JAVA_HOME "{{remote_java_home}}" /m'
+- name:  Set JRE_HOME with raw
+  raw: 'setx JRE_HOME "{{remote_jre_home}}" /m'
+- name:  Set CATALINA_HOME with raw
+  raw: 'setx CATALINA_HOME "{{remote_tomcat_home}}" /m'
+- name:  Set CATALINA_BASE with raw
+  raw: 'setx CATALINA_BASE "{{remote_tomcat_home}}" /m'
+- name:  Install Tomcat Service with raw
+#  variable path is not working due to program file name
+  raw: '"C:\Program Files\apache-tomcat\tomcat8\bin\service.bat" install'
+- name:  Start Tomcat8 service with win_service
+  win_service: 
+     name: Tomcat8
+     start_mode: auto
+     state: started
+

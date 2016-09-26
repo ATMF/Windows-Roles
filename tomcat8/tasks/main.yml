@@ -1,0 +1,36 @@
+---
+# tasks file for tomcat8
+- name: Copy Java JRE 7  with win_copy
+  win_copy:
+     src: jdk-7u79-windows-x64.exe
+     dest: c:/temp/
+- name: Copy Tomcat8 Zip with win_copy
+  win_copy:
+     src: apache-tomcat-8.5.5CHANGED.zip
+     dest: c:/temp/
+- name:  Create Tomcat Directory with win_file
+  win_file: 
+     path: c:\program files\apache-tomcat
+     state: directory
+- name:  Unzip Tomcat Folder with win_unzip
+  win_unzip: 
+     src: c:\temp\apache-tomcat-8.5.5CHANGED.zip
+     dest: c:\program files\apache-tomcat
+- name:  Install Java with raw
+  raw: 'c:\temp\jdk-7u79-windows-x64.exe /s'
+- name:  Set JAVA_HOME with raw
+  raw: 'setx JAVA_HOME "C:\Program Files\Java\jdk1.7.0_79" /m'
+- name:  Set JRE_HOME with raw
+  raw: 'setx JRE_HOME "C:\Program Files\Java\jre7" /m'
+- name:  Set CATALINA_HOME with raw
+  raw: 'setx CATALINA_HOME "C:\Program Files\apache-tomcat\tomcat8" /m'
+- name:  Set CATALINA_BASE with raw
+  raw: 'setx CATALINA_BASE "C:\Program Files\apache-tomcat\tomcat8" /m'
+- name:  Install Tomcat Service with raw
+  raw: '"C:\Program Files\apache-tomcat\tomcat8\bin\service.bat" install'
+- name:  Start Tomcat8 service with win_service
+  win_service: 
+     name: Tomcat8
+     start_mode: auto
+     state: started
+
