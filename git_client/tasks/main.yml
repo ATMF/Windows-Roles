@@ -1,0 +1,12 @@
+---
+- name: Install git client
+  win_webpicmd:
+    name: msysgitVS
+
+- name: Get actual PATH
+  raw: $ENV:PATH
+  register: path_out
+
+- name: Add Git to PATH
+  raw: SETX /M PATH "$ENV:PATH;C:\Program Files\Git\bin"
+  when: path_out.stdout.find("Git'\'bin") == -1
