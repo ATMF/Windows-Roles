@@ -1,0 +1,15 @@
+---
+# tasks file for SVN installation
+
+- name:  Create temp folder
+  win_file: 
+     path: c:\\temp
+     state: directory
+
+- name: Copy Powershell script
+  win_copy:
+     src: svn_installation.ps1
+     dest: c:/temp/
+
+- name: Install collbanet svn
+  raw: "c:/temp/svn_installation.ps1"
