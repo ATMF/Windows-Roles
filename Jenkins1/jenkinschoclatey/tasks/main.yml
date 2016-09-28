@@ -1,0 +1,18 @@
+---
+
+- name: Installing jdk8 using chocolatey module
+  win_chocolatey:
+    name: jdk8
+
+- name: Get actual PATH
+  raw: $ENV:PATH
+  register: path_out
+
+- name: Add java to path to environment variable
+  raw: SETX /M PATH "$ENV:PATH;C:\Program Files\Java\jdk1.8.0_102\bin"
+  when: path_out.stdout.find('jre') == -1
+
+- name: Install jenkins using chocolatey module
+  win_chocolatey:
+    name: jenkins
+    ignore_checksums: yes
