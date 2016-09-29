@@ -1,7 +1,0 @@
----
-
-- name: Installation of Jenkins
-  hosts: all
-  roles:
-  - java
-  - jenkinscomplete
