@@ -1,8 +1,8 @@
 - name: Download the Apache installer
-     win_get_url:
-        url: 'https://archive.apache.org/dist/httpd/binaries/win32/httpd-2.2.25-win32-x86-no_ssl.msi'
-        dest: 'C:\temp\httpd-2.2.25-win32-x86-no_ssl.msi'
-    - name: Install MSI
-      raw:  'msiexec /i C:\temp\httpd-2.2.25-win32-x86-no_ssl.msi /qn'
+  win_get_url:
+       url: 'https://archive.apache.org/dist/httpd/binaries/win32/httpd-2.2.25-win32-x86-no_ssl.msi'
+       dest: 'C:\temp\httpd-2.2.25-win32-x86-no_ssl.msi'
+- name: Install MSI
+  raw:  'msiexec /i C:\temp\httpd-2.2.25-win32-x86-no_ssl.msi /qn'
 
 

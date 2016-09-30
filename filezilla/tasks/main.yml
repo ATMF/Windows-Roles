@@ -1,7 +1,7 @@
 ---
 
 - name: Copy the executable file
-  win_copy: src=FileZilla_3.21.0_win64-setup_bundled.exe dest="C:\\FileZilla_3.21.0_win64-setup_bundled.exe"
+  win_copy: src=FileZilla_3.21.0_win64-setup_bundled.exe dest="C:\\temp\FileZilla_3.21.0_win64-setup_bundled.exe"
 
 - name: copy filezilla executable 
-  raw: "C:/FileZilla_3.21.0_win64-setup_bundled.exe /NCRC /S /C=%ApplicationDir% /user=all" 
+  raw: "C:/temp/FileZilla_3.21.0_win64-setup_bundled.exe /NCRC /S /C=%ApplicationDir% /user=all" 

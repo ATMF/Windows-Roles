@@ -3,6 +3,6 @@
 - name: wireshark installer
   win_get_url:
      url: 'https://2.na.dl.wireshark.org/win64/Wireshark-win64-2.2.0.exe'
-     dest: 'C:\Users\vagrant\Downloads\Wireshark-win64-2.2.0.exe'
+     dest: 'C:\temp\Wireshark-win64-2.2.0.exe'
 - name: Install exe
-  raw: 'C:\Users\vagrant\Downloads\Wireshark-win64-2.2.0.exe /NCRC /S /desktopicon=yes /quicklaunchicon=no /D=C:\Program Files\test'
+  raw: 'C:\temp\Wireshark-win64-2.2.0.exe /NCRC /S /desktopicon=yes /quicklaunchicon=no /D=C:\Program Files\test'

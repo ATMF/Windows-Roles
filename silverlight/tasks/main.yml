@@ -3,7 +3,7 @@
 - name: Download silverlight executable package
   win_get_url:
     url: http://download.microsoft.com/download/7/7/6/7765A6A5-4B02-41DE-B7AF-067C92C581BD/50709.00/Silverlight_x64.exe 
-    dest: 'C:\\Silverlight_x64.exe'
+    dest: 'C:\\temp\Silverlight_x64.exe'
 
 - name: Silent installation of silverlight
-  raw: 'C:/SilverLight_x64.exe /q /doNotRequireDRMPrompt /ignorewarnings /noupdate'
+  raw: 'C:/temp/SilverLight_x64.exe /q /doNotRequireDRMPrompt /ignorewarnings /noupdate'
