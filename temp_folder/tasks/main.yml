@@ -1,0 +1,7 @@
+---
+# tasks file for temp folder creation
+
+- name:  Create temp folder
+  win_file: 
+     path: c:\\temp
+     state: directory
