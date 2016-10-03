@@ -1,0 +1,40 @@
+--- 
+
+- name:  Create temp folder
+  win_file:
+     path: c:\\temp
+     state: directory
+
+- name: Installing jdk8 using chocolatey module
+  win_chocolatey:
+    name: jdk8
+
+- name: Get actual PATH
+  raw: $ENV:PATH
+  register: path_out
+
+- name: Add java to path to environment variable
+  raw: SETX /M PATH "$ENV:PATH;C:\Program Files\Java\jdk1.8.0_102\bin"
+  when: path_out.stdout.find('jre') == -1
+
+- name: Download nexus bundle.zip for windows
+  win_get_url:
+    url: 'https://sonatype-download.global.ssl.fastly.net/nexus/oss/nexus-2.14.0-01-bundle.zip'
+    dest: 'C:\\temp\\nexus-2.14.0-01-bundle.zip'
+
+- name: Unzip the nexus bundle
+  win_unzip:
+    src: "C:\\temp\\nexus-2.14.0-01-bundle.zip"
+    dest: "C:\\temp\\nexus-2.14.0-01-bundle"
+
+- name: Copy the ps script which copies nexus bundle to program files and adds windows service
+  win_copy: src=nexus.ps1 dest="C:\\temp\\mnexus.ps1"
+
+- name: Installation of nexus service using bat file with help of script
+  raw: C:\temp\mnexus.ps1
+
+- name: Start nexus service
+  win_service:
+    name: nexus
+    start_mode: auto
+    state: started
