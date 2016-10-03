@@ -1,0 +1,31 @@
+---
+
+- name: Installing jdk8 using chocolatey module
+  win_chocolatey:
+    name: jdk8
+
+- name: Get actual PATH
+  raw: $ENV:PATH
+  register: path_out
+
+- name: Add java to path to environment variable
+  raw: SETX /M PATH "$ENV:PATH;C:\Program Files\Java\jdk1.8.0_102\bin"
+  when: path_out.stdout.find('jre') == -1
+
+- name: Download jenkins.war file
+  win_get_url:
+    url: 'http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/2.22/jenkins.war'
+    dest: "C:\\jenkins.war"
+
+- name: Copy the powershell script to host machine
+  win_copy: src=jenkins.ps1 dest="C:\\jenkins.ps1"
+
+- name: Install jenkins on host machine
+  raw: C:\jenkins.ps1
+
+- name: Copy bat script for adding win service
+  win_copy: src=winserve.bat dest="C:\\winserve.bat"
+  
+- name: Execute bat file
+  raw: C:\winserve.bat
+
