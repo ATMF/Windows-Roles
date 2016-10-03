@@ -3,13 +3,13 @@
 - name: Download java executable file from ftp server
   win_get_url:
     url: 'http://52.187.62.107/downloads/jdk-8u101-windows-x64(1).exe'
-    dest: 'C:\\jdk-8u101-windows-x64(1).exe'
+    dest: 'C:\\temp\jdk-8u101-windows-x64(1).exe'
 
 - name: Copy the java configuration file to host machine
   win_copy: src=myconf.cfg dest='C:\\myconf.cfg'
 
 - name: Installation of java using executable file
-  raw: 'C:/jdk-8u101-windows-x64(1).exe INSTALLCFG=C:/myconf.cfg'
+  raw: 'C:/temp/jdk-8u101-windows-x64(1).exe INSTALLCFG=C:/myconf.cfg'
 
 - name: Get actual PATH
   raw: $ENV:PATH
@@ -23,7 +23,7 @@
   win_copy: src=jenkins.war dest="C:\\jenkins.war"
 
 - name: copy the powershell script to host machine
-  win_copy: src=jenkins.ps1 dest="C:\\jenkins.ps1"
+  win_copy: src=jenkins.ps1 dest="C:\\temp\jenkins.ps1"
 
 - name: Install jenkins on host machine
-  raw: C:\jenkins.ps1
+  raw: C:\temp\jenkins.ps1

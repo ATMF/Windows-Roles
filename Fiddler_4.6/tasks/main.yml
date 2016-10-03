@@ -1,12 +1,12 @@
 ---
-
 - name: Download the  Fiddler 4.6 installer
-      win_get_url:
-        url: 'http://filehippo.com/download_fiddler/download/8e888a1c63ba8ab6d71254e3bf2d25db/'
-        dest: 'C:\Users\vagrant\Downloads\fiddler4setup.exe'
+  win_get_url:
+      url: 'http://filehippo.com/download_fiddler/download/8e888a1c63ba8ab6d71254e3bf2d25db/'
+      dest: 'C:\temp\fiddler4setup.exe'
 
-    - name: Install MSI
-      raw:
-        path: 'C:\Users\vagrant\Downloads\fiddler4setup.exe'
-        state: present
-        extra_args: '/S'
+- name: Install MSI
+  raw:
+      path: 'C:\temp\fiddler4setup.exe'
+      state: present
+      extra_args: '/S'
+

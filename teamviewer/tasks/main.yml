@@ -1,12 +1,12 @@
 ---
 
 - name: Download the Apache installer
-      win_get_url:
-        url: 'https://download.teamviewer.com/download/TeamViewer_Setup_en-jhj.exe'
-        dest: 'C:\Users\vagrant\Downloads\TeamViewer_Setup_en-jhj.exe'
+  win_get_url:
+      url: 'https://download.teamviewer.com/download/TeamViewer_Setup_en-jhj.exe'
+      dest: 'C:\temp\TeamViewer_Setup_en-jhj.exe'
 
-    - name: Install MSI
-      raw:
-        path: 'C:\Users\vagrant\Downloads\TeamViewer_Setup_en-jhj.exe'
-        state: present
-        extra_args: '/S'
+- name: Install MSI
+  raw:
+     path: 'C:\temp\TeamViewer_Setup_en-jhj.exe'
+     state: present
+     extra_args: '/S'
