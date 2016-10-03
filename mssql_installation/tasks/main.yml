@@ -1,0 +1,101 @@
+---
+- name:  Create temp folder
+  win_file:
+     path: c:\\temp
+     state: directory
+
+#- name: Download and save windows installer file
+##  win_get_url:
+##     url: 'http://download.microsoft.com/download/C/F/F/CFF3A0B8-99D4-41A2-AE1A-496C08BEB904/WebPlatformInstaller_amd64_en-US.msi'
+##     dest: 'C:\temp\webpi.msi'
+#
+##- name: Install msi package
+##  win_msi:
+##     path: 'C:\temp\webpi.msi'
+##     state: present
+##     wait: true
+#
+##- name: copy powershell script
+##  win_copy:
+##     src: dotnet3_5.ps1
+##     dest: c:/temp/
+#
+##- name: run dontnet framework 3.5 installation
+##  raw: c:/temp/dotnet3_5.ps1
+
+- name: download mssql 2008r2 enterprise server powershell
+  win_get_url:
+      url: 'http://52.187.62.107/downloads/SQL2008r2.zip'
+      dest: 'C:\temp\SQL2008r2.zip'
+
+- name: Unzip SQL2008r2
+  win_unzip:
+      src: "C:\temp\SQL2008r2.zip"
+      dest: "C:\temp\SQL2008r2"
+      creates: "C:\temp\SQL2008r2"
+
+- name: copy powershell script
+  win_copy:
+      src: SQL2k8R2.ps1
+      dest: c:/temp/
+
+- name: copy config
+  win_copy:
+      src: configurationfile.ini
+      dest: c:/temp/
+
+
+- name: run mssql 2008r2 installation
+  raw: "c:/temp/SQL2k8R2.ps1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
