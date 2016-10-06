@@ -1,0 +1,10 @@
+- name: copy restore sql script
+  win_template:
+     src:  restoredb.sql.j2
+     dest: c:\temp\restoredb_{{database_name}}.sql
+- name:  copy restore batch file
+  win_template:
+     src:  restoredb.bat.j2
+     dest: c:\temp\restoredb_{{database_name}}.bat
+- name:  run restore batch file
+  raw:  'c:\temp\restoredb_{{database_name}}.bat'
