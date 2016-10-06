@@ -1,0 +1,10 @@
+- name: copy backup sql script
+  win_template:
+     src:  backupdb.sql.j2
+     dest: c:\temp\backupdb_{{database_name}}.sql
+- name:  copy datbase batch file
+  win_template:
+     src:  backupdb.bat.j2
+     dest: c:\temp\backupdb_{{database_name}}.bat
+- name:  run backup batch file
+  raw:  'c:\temp\backupdb_{{database_name}}.bat'
